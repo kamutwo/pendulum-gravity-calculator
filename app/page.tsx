@@ -12,8 +12,18 @@ export default function Home() {
     setPanjangTali(Number.parseFloat(newInput));
   };
 
+  const wAyunan = (newInput: string) => {
+    const input = document.getElementById("ayunan") as HTMLInputElement;
+    const newNumber = Number.parseFloat(newInput);
+    setPeriodeAyunan(newNumber / 10);
+    input.value = String(newNumber / 10);
+  };
+
   const ayunan = (newInput: string) => {
-    setPeriodeAyunan(Number.parseFloat(newInput));
+    const input = document.getElementById("wAyunan") as HTMLInputElement;
+    const newNumber = Number.parseFloat(newInput);
+    setPeriodeAyunan(newNumber);
+    input.value = String(newNumber * 10);
   };
 
   useEffect(() => {
@@ -27,19 +37,32 @@ export default function Home() {
     <div className="w-full h-screen">
       <div className="h-full flex justify-center items-center">
         <div className="flex flex-col items-center gap-2">
-          <Input id="tali" title="Panjang Tali (m)" onChange={tali} />
-          <Input id="ayunan" title="Periode Ayunan (s)" onChange={ayunan} />
+          <Input id="tali" title="Panjang Tali (cm)" onChange={tali} />
+          <Input
+            id="wAyunan"
+            title="Waktu untuk 10 ayunan (s)"
+            onChange={wAyunan}
+          />
+          <Input id="ayunan" title="Periode ayunan (s)" onChange={ayunan} />
 
+          <div>Kuat Medan Gravitasi : </div>
           <div>
-            Kuat Medan Gravitasi :{" "}
             <b>
               {result != null && !Number.isNaN(result)
-                ? `${result} m/s²`
+                ? `${result} cm/s²`
                 : "NaN"}
             </b>
+            {result != null && !Number.isNaN(result) ? (
+              <>
+                <br />
+                <b>{result / 100} m/s²</b>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         </div>
-        <div className="absolute mt-[40%]">
+        <div className="absolute mt-[70vh]">
           Made by <strong>Youtwo_</strong>
         </div>
       </div>
